@@ -1,4 +1,320 @@
 package grid
+  
+  package active_loads
+    model rc
+      parameter SI.Resistance R1 = 20;
+      parameter SI.Resistance R2 = 20;
+      parameter SI.Resistance R3 = 20;
+      parameter SI.Capacitance C1 = 0.00001;
+      parameter SI.Capacitance C2 = 0.00001;
+      parameter SI.Capacitance C3 = 0.00001;
+      Modelica.Electrical.Analog.Interfaces.Pin pin1 annotation(
+        Placement(visible = true, transformation(origin = {-100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Interfaces.Pin pin2 annotation(
+        Placement(visible = true, transformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Basic.Ground ground1 annotation(
+        Placement(visible = true, transformation(origin = {0, -86}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Basic.Capacitor capacitor1(C = C1) annotation(
+        Placement(visible = true, transformation(origin = {-66, -48}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Basic.Capacitor capacitor2(C = C2) annotation(
+        Placement(visible = true, transformation(origin = {-32, -10}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Basic.Capacitor capacitor3(C = C3) annotation(
+        Placement(visible = true, transformation(origin = {48, 0}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Interfaces.Pin pin3 annotation(
+        Placement(visible = true, transformation(origin = {-100, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      grid.components.resistor resistor1(R = R1) annotation(
+        Placement(visible = true, transformation(origin = {-50, -48}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      grid.components.resistor resistor2(R = R2) annotation(
+        Placement(visible = true, transformation(origin = {0, -10}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      grid.components.resistor resistor3(R = R3) annotation(
+        Placement(visible = true, transformation(origin = {72, -2}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+    equation
+      connect(resistor2.n, ground1.p) annotation(
+        Line(points = {{0, -20}, {0, -20}, {0, -76}, {0, -76}}, color = {0, 0, 255}));
+      connect(pin2, resistor2.p) annotation(
+        Line(points = {{-100, 0}, {0, 0}, {0, 0}, {0, 0}}, color = {0, 0, 255}));
+      connect(resistor1.p, pin1) annotation(
+        Line(points = {{-50, -38}, {-50, -38}, {-50, -22}, {-90, -22}, {-90, -60}, {-100, -60}, {-100, -60}}, color = {0, 0, 255}));
+      connect(resistor1.n, ground1.p) annotation(
+        Line(points = {{-50, -58}, {-50, -58}, {-50, -62}, {0, -62}, {0, -76}, {0, -76}}, color = {0, 0, 255}));
+      connect(resistor3.n, ground1.p) annotation(
+        Line(points = {{72, -12}, {72, -12}, {72, -62}, {0, -62}, {0, -76}, {0, -76}}, color = {0, 0, 255}));
+      connect(pin3, resistor3.p) annotation(
+        Line(points = {{-100, 60}, {68, 60}, {68, 60}, {72, 60}, {72, 8}, {72, 8}}, color = {0, 0, 255}));
+      connect(capacitor1.p, pin1) annotation(
+        Line(points = {{-66, -38}, {-66, -22}, {-90, -22}, {-90, -60}, {-100, -60}}, color = {0, 0, 255}));
+      connect(capacitor3.p, pin3) annotation(
+        Line(points = {{48, 10}, {48, 60}, {-100, 60}}, color = {0, 0, 255}));
+      connect(pin3, capacitor3.p) annotation(
+        Line(points = {{-100, 60}, {48, 60}, {48, 10}}, color = {0, 0, 255}));
+      connect(capacitor3.n, ground1.p) annotation(
+        Line(points = {{48, -10}, {48, -62}, {0, -62}, {0, -76}}, color = {0, 0, 255}));
+      connect(capacitor2.p, pin2) annotation(
+        Line(points = {{-32, 0}, {-100, 0}}, color = {0, 0, 255}));
+      connect(capacitor2.n, ground1.p) annotation(
+        Line(points = {{-32, -20}, {-32, -62}, {0, -62}, {0, -76}}, color = {0, 0, 255}));
+      connect(capacitor1.n, ground1.p) annotation(
+        Line(points = {{-66, -58}, {-66, -62}, {0, -62}, {0, -76}}, color = {0, 0, 255}));
+    end rc;
+  
+    model c
+      parameter SI.Capacitance C1 = 0.00001;
+      parameter SI.Capacitance C2 = 0.00001;
+      parameter SI.Capacitance C3 = 0.00001;
+      Modelica.Electrical.Analog.Interfaces.Pin pin3 annotation(
+        Placement(visible = true, transformation(origin = {-100, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Interfaces.Pin pin1 annotation(
+        Placement(visible = true, transformation(origin = {-100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Interfaces.Pin pin2 annotation(
+        Placement(visible = true, transformation(origin = {-102, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-102, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Basic.Capacitor capacitor1(C = C1) annotation(
+        Placement(visible = true, transformation(origin = {-34, -44}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Basic.Capacitor capacitor2(C = C2) annotation(
+        Placement(visible = true, transformation(origin = {4, -10}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Basic.Capacitor capacitor3(C = C3) annotation(
+        Placement(visible = true, transformation(origin = {40, 38}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Basic.Ground ground1 annotation(
+        Placement(visible = true, transformation(origin = {4, -84}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    equation
+      connect(capacitor3.p, pin3) annotation(
+        Line(points = {{40, 48}, {40, 60}, {-100, 60}}, color = {0, 0, 255}));
+      connect(pin2, capacitor2.p) annotation(
+        Line(points = {{-102, 0}, {4, 0}}, color = {0, 0, 255}));
+      connect(capacitor2.n, ground1.p) annotation(
+        Line(points = {{4, -20}, {4, -74}}, color = {0, 0, 255}));
+      connect(pin1, capacitor1.p) annotation(
+        Line(points = {{-100, -60}, {-67, -60}, {-67, -34}, {-34, -34}}, color = {0, 0, 255}));
+      connect(capacitor3.n, ground1.p) annotation(
+        Line(points = {{40, 28}, {40, -54}, {4, -54}, {4, -74}}, color = {0, 0, 255}));
+      connect(capacitor1.n, ground1.p) annotation(
+        Line(points = {{-34, -54}, {4, -54}, {4, -74}, {4, -74}}, color = {0, 0, 255}));
+    end c;
+  
+    model r_active
+    
+      Modelica.Electrical.Analog.Interfaces.Pin pin1 annotation(
+        Placement(visible = true, transformation(origin = {-100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Interfaces.Pin pin2 annotation(
+        Placement(visible = true, transformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Basic.Ground ground1 annotation(
+        Placement(visible = true, transformation(origin = {0, -86}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Interfaces.Pin pin3 annotation(
+        Placement(visible = true, transformation(origin = {-100, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  grid.components.active_load active_load1(p_ref = 5000, u_ref = 325.269119346)  annotation(
+        Placement(visible = true, transformation(origin = {-50, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  grid.components.active_load active_load3(p_ref = 5000, u_ref = 325.269119346)  annotation(
+        Placement(visible = true, transformation(origin = {-50, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  grid.components.active_load active_load2(p_ref = 5000, u_ref = 325.269119346) annotation(
+        Placement(visible = true, transformation(origin = {-50, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    equation
+      connect(pin1, active_load1.p) annotation(
+        Line(points = {{-100, -60}, {-60, -60}, {-60, -60}, {-60, -60}}, color = {0, 0, 255}));
+      connect(active_load1.n, ground1.p) annotation(
+        Line(points = {{-40, -60}, {0, -60}, {0, -76}, {0, -76}}, color = {0, 0, 255}));
+      connect(pin3, active_load3.p) annotation(
+        Line(points = {{-100, 60}, {-60, 60}, {-60, 60}, {-60, 60}}, color = {0, 0, 255}));
+      connect(active_load3.n, ground1.p) annotation(
+        Line(points = {{-40, 60}, {0, 60}, {0, -76}, {0, -76}}, color = {0, 0, 255}));
+  connect(pin2, active_load2.p) annotation(
+        Line(points = {{-100, 0}, {-60, 0}, {-60, 0}, {-60, 0}}, color = {0, 0, 255}));
+  connect(active_load2.n, ground1.p) annotation(
+        Line(points = {{-40, 0}, {0, 0}, {0, -76}, {0, -76}}, color = {0, 0, 255}));
+    end r_active;
+  
+    model l
+      parameter SI.Inductance L1 = 0.001;
+      parameter SI.Inductance L2 = 0.001;
+      parameter SI.Inductance L3 = 0.001;
+      Modelica.Electrical.Analog.Interfaces.Pin pin1 annotation(
+        Placement(visible = true, transformation(origin = {-100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Interfaces.Pin pin2 annotation(
+        Placement(visible = true, transformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Basic.Ground ground1 annotation(
+        Placement(visible = true, transformation(origin = {0, -86}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Interfaces.Pin pin3 annotation(
+        Placement(visible = true, transformation(origin = {-100, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Basic.Inductor inductor1(L = L1) annotation(
+        Placement(visible = true, transformation(origin = {-48, -50}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Basic.Inductor inductor2(L = L2) annotation(
+        Placement(visible = true, transformation(origin = {0, -16}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Basic.Inductor inductor3(L = L3) annotation(
+        Placement(visible = true, transformation(origin = {50, 50}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+    equation
+      connect(inductor3.n, ground1.p) annotation(
+        Line(points = {{50, 40}, {50, 40}, {50, -60}, {0, -60}, {0, -76}, {0, -76}}, color = {0, 0, 255}));
+      connect(pin3, inductor3.p) annotation(
+        Line(points = {{-100, 60}, {50, 60}, {50, 60}, {50, 60}}, color = {0, 0, 255}));
+      connect(inductor2.n, ground1.p) annotation(
+        Line(points = {{0, -26}, {0, -26}, {0, -76}, {0, -76}}, color = {0, 0, 255}));
+      connect(pin2, inductor2.p) annotation(
+        Line(points = {{-100, 0}, {0, 0}, {0, -6}}, color = {0, 0, 255}));
+      connect(inductor1.n, ground1.p) annotation(
+        Line(points = {{-48, -60}, {0, -60}, {0, -76}, {0, -76}}, color = {0, 0, 255}));
+      connect(pin1, inductor1.p) annotation(
+        Line(points = {{-100, -60}, {-78, -60}, {-78, -40}, {-48, -40}, {-48, -40}, {-48, -40}}, color = {0, 0, 255}));
+    end l;
+  
+    model rlc
+      parameter SI.Resistance R1 = 20;
+      parameter SI.Resistance R2 = 20;
+      parameter SI.Resistance R3 = 20;
+      parameter SI.Capacitance C1 = 0.00001;
+      parameter SI.Capacitance C2 = 0.00001;
+      parameter SI.Capacitance C3 = 0.00001;
+      parameter SI.Inductance L1 = 0.001;
+      parameter SI.Inductance L2 = 0.001;
+      parameter SI.Inductance L3 = 0.001;
+      Modelica.Electrical.Analog.Interfaces.Pin pin1 annotation(
+        Placement(visible = true, transformation(origin = {-100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Interfaces.Pin pin2 annotation(
+        Placement(visible = true, transformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Basic.Ground ground1 annotation(
+        Placement(visible = true, transformation(origin = {0, -86}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Basic.Capacitor capacitor1(C = C1) annotation(
+        Placement(visible = true, transformation(origin = {-74, -68}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Basic.Capacitor capacitor2(C = C2) annotation(
+        Placement(visible = true, transformation(origin = {0, -30}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Basic.Capacitor capacitor3(C = C3) annotation(
+        Placement(visible = true, transformation(origin = {74, -46}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Interfaces.Pin pin3 annotation(
+        Placement(visible = true, transformation(origin = {-100, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Basic.Inductor inductor1(L = L1) annotation(
+        Placement(visible = true, transformation(origin = {-74, -44}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Basic.Inductor inductor2(L = L2) annotation(
+        Placement(visible = true, transformation(origin = {0, 2}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Basic.Inductor inductor3(L = L3) annotation(
+        Placement(visible = true, transformation(origin = {74, -4}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      grid.components.resistor resistor1(R = R1) annotation(
+        Placement(visible = true, transformation(origin = {-74, -20}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      grid.components.resistor resistor2(R = R2) annotation(
+        Placement(visible = true, transformation(origin = {0, 36}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      grid.components.resistor resistor3(R = R3) annotation(
+        Placement(visible = true, transformation(origin = {74, 42}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+    equation
+      connect(resistor1.p, pin1) annotation(
+        Line(points = {{-74, -10}, {-100, -10}, {-100, -60}}, color = {0, 0, 255}));
+      connect(pin2, resistor2.p) annotation(
+        Line(points = {{-100, 0}, {-50, 0}, {-50, 46}, {0, 46}}, color = {0, 0, 255}));
+      connect(resistor3.p, pin3) annotation(
+        Line(points = {{74, 52}, {74, 52}, {74, 60}, {-100, 60}, {-100, 60}}, color = {0, 0, 255}));
+      connect(capacitor2.n, ground1.p) annotation(
+        Line(points = {{0, -40}, {0, -76}}, color = {0, 0, 255}));
+      connect(capacitor3.n, ground1.p) annotation(
+        Line(points = {{74, -56}, {74, -62}, {0, -62}, {0, -76}}, color = {0, 0, 255}));
+      connect(capacitor1.p, inductor1.n) annotation(
+        Line(points = {{-74, -58}, {-74, -58}, {-74, -54}, {-74, -54}}, color = {0, 0, 255}));
+      connect(resistor1.n, inductor1.p) annotation(
+        Line(points = {{-74, -30}, {-74, -30}, {-74, -30}, {-74, -34}}, color = {0, 0, 255}));
+      connect(resistor2.n, inductor2.p) annotation(
+        Line(points = {{0, 26}, {0, 26}, {0, 12}, {0, 12}}, color = {0, 0, 255}));
+      connect(inductor2.n, capacitor2.p) annotation(
+        Line(points = {{0, -8}, {0, -8}, {0, -8}, {0, -20}}, color = {0, 0, 255}));
+      connect(resistor3.n, inductor3.p) annotation(
+        Line(points = {{74, 32}, {74, 32}, {74, 6}, {74, 6}}, color = {0, 0, 255}));
+      connect(capacitor3.p, inductor3.n) annotation(
+        Line(points = {{74, -36}, {74, -36}, {74, -14}, {74, -14}}, color = {0, 0, 255}));
+      connect(capacitor1.n, ground1.p) annotation(
+        Line(points = {{-74, -78}, {-46, -78}, {-46, -62}, {0, -62}, {0, -76}, {0, -76}}, color = {0, 0, 255}));
+    end rlc;
+  
+    model lc
+      parameter SI.Capacitance C1(start = 0.00001);
+      parameter SI.Capacitance C2(start = 0.00001);
+      parameter SI.Capacitance C3(start = 0.00001);
+      parameter SI.Inductance L1(start = 0.001);
+      parameter SI.Inductance L2(start = 0.001);
+      parameter SI.Inductance L3(start = 0.001);
+      Modelica.Electrical.Analog.Interfaces.Pin pin1 annotation(
+        Placement(visible = true, transformation(origin = {-100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Interfaces.Pin pin2 annotation(
+        Placement(visible = true, transformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Basic.Ground ground1 annotation(
+        Placement(visible = true, transformation(origin = {0, -86}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Basic.Capacitor capacitor1(C = C1) annotation(
+        Placement(visible = true, transformation(origin = {-56, -18}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Basic.Capacitor capacitor2(C = C2) annotation(
+        Placement(visible = true, transformation(origin = {0, 8}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Basic.Capacitor capacitor3(C = C3) annotation(
+        Placement(visible = true, transformation(origin = {56, 42}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Interfaces.Pin pin3 annotation(
+        Placement(visible = true, transformation(origin = {-100, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Basic.Inductor inductor1(L = L1) annotation(
+        Placement(visible = true, transformation(origin = {-56, -44}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Basic.Inductor inductor2(L = L2) annotation(
+        Placement(visible = true, transformation(origin = {0, -24}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Basic.Inductor inductor3(L = L3) annotation(
+        Placement(visible = true, transformation(origin = {56, 8}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+    equation
+      connect(capacitor3.n, inductor3.p) annotation(
+        Line(points = {{56, 32}, {56, 32}, {56, 18}, {56, 18}}, color = {0, 0, 255}));
+      connect(inductor3.n, ground1.p) annotation(
+        Line(points = {{56, -2}, {56, -62}, {0, -62}, {0, -76}}, color = {0, 0, 255}));
+      connect(capacitor1.n, inductor1.p) annotation(
+        Line(points = {{-56, -28}, {-56, -28}, {-56, -34}, {-56, -34}}, color = {0, 0, 255}));
+      connect(inductor1.n, ground1.p) annotation(
+        Line(points = {{-56, -54}, {-56, -62}, {0, -62}, {0, -76}}, color = {0, 0, 255}));
+      connect(capacitor1.p, pin1) annotation(
+        Line(points = {{-56, -8}, {-56, 0}, {-88, 0}, {-88, -60}, {-100, -60}}, color = {0, 0, 255}));
+      connect(capacitor2.p, pin2) annotation(
+        Line(points = {{0, 18}, {0, 24}, {-94, 24}, {-94, 0}, {-100, 0}}, color = {0, 0, 255}));
+      connect(capacitor2.n, inductor2.p) annotation(
+        Line(points = {{0, -2}, {0, -2}, {0, -14}, {0, -14}}, color = {0, 0, 255}));
+      connect(inductor2.n, ground1.p) annotation(
+        Line(points = {{0, -34}, {0, -76}}, color = {0, 0, 255}));
+      connect(pin3, capacitor3.p) annotation(
+        Line(points = {{-100, 60}, {56, 60}, {56, 52}}, color = {0, 0, 255}));
+      connect(capacitor3.p, pin3) annotation(
+        Line(points = {{56, 52}, {56, 60}, {-100, 60}}, color = {0, 0, 255}));
+    end lc;
+  
+    model rl
+      parameter SI.Resistance R1 = 20;
+      parameter SI.Resistance R2 = 20;
+      parameter SI.Resistance R3 = 20;
+      parameter SI.Inductance L1 = 0.001;
+      parameter SI.Inductance L2 = 0.001;
+      parameter SI.Inductance L3 = 0.001;
+      Modelica.Electrical.Analog.Interfaces.Pin pin1 annotation(
+        Placement(visible = true, transformation(origin = {-100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, -60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Interfaces.Pin pin2 annotation(
+        Placement(visible = true, transformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 0}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Basic.Ground ground1 annotation(
+        Placement(visible = true, transformation(origin = {0, -86}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Interfaces.Pin pin3 annotation(
+        Placement(visible = true, transformation(origin = {-100, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0), iconTransformation(origin = {-100, 60}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Basic.Inductor inductor1(L = L1) annotation(
+        Placement(visible = true, transformation(origin = {-40, -46}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Basic.Inductor inductor2(L = L2) annotation(
+        Placement(visible = true, transformation(origin = {0, -18}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      Modelica.Electrical.Analog.Basic.Inductor inductor3(L = L3) annotation(
+        Placement(visible = true, transformation(origin = {60, 8}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      grid.components.resistor resistor1(R=R1) annotation(
+        Placement(visible = true, transformation(origin = {-40, -20}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      grid.components.resistor resistor2(R=R2) annotation(
+        Placement(visible = true, transformation(origin = {0, 12}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+      grid.components.resistor resistor3(R=R3) annotation(
+        Placement(visible = true, transformation(origin = {60, 34}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
+    equation
+      connect(resistor1.n, inductor1.p) annotation(
+        Line(points = {{-40, -30}, {-40, -30}, {-40, -36}, {-40, -36}}, color = {0, 0, 255}));
+      connect(pin3, resistor3.p) annotation(
+        Line(points = {{-100, 60}, {60, 60}, {60, 44}, {60, 44}}, color = {0, 0, 255}));
+      connect(resistor3.n, inductor3.p) annotation(
+        Line(points = {{60, 24}, {60, 24}, {60, 24}, {60, 18}}, color = {0, 0, 255}));
+      connect(resistor2.n, inductor2.p) annotation(
+        Line(points = {{0, 2}, {0, 2}, {0, -8}, {0, -8}}, color = {0, 0, 255}));
+      connect(pin2, resistor2.p) annotation(
+        Line(points = {{-100, 0}, {-66, 0}, {-66, 22}, {0, 22}}, color = {0, 0, 255}));
+      connect(pin1, resistor1.p) annotation(
+        Line(points = {{-100, -60}, {-74, -60}, {-74, -10}, {-40, -10}, {-40, -10}}, color = {0, 0, 255}));
+      connect(inductor3.n, ground1.p) annotation(
+        Line(points = {{60, -2}, {60, -62}, {0, -62}, {0, -76}}, color = {0, 0, 255}));
+      connect(inductor1.n, ground1.p) annotation(
+        Line(points = {{-40, -56}, {-40, -62}, {0, -62}, {0, -76}}, color = {0, 0, 255}));
+      connect(inductor2.n, ground1.p) annotation(
+        Line(points = {{0, -28}, {0, -76}}, color = {0, 0, 255}));
+    end rl;
+  end active_loads;
   import SI = Modelica.SIunits;
 
   package filter
@@ -1309,6 +1625,31 @@ package grid
 </html>"),
         Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent = {{-70, 30}, {70, -30}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Line(points = {{-90, 0}, {-70, 0}}, color = {0, 0, 255}), Line(points = {{70, 0}, {90, 0}}, color = {0, 0, 255}), Text(extent = {{-150, -40}, {150, -80}}, textString = "R=%R"), Line(visible = useHeatPort, points = {{0, -100}, {0, -30}}, color = {127, 0, 0}, pattern = LinePattern.Dot), Text(extent = {{-150, 90}, {150, 50}}, textString = "%name", lineColor = {0, 0, 255})}));
     end resistor;
+    
+    model active_load
+      parameter SI.Power p_ref(start = 1);
+      parameter SI.Voltage u_ref(start = 1);
+      extends Modelica.Electrical.Analog.Interfaces.OnePort;
+    equation
+      v = u_ref * u_ref / p_ref * i;
+      annotation(
+        Documentation(info = "<html>
+    <p>The linear resistor connects the branch voltage <em>v</em> with the branch current <em>i</em> by <em>i*R = v</em>. The Resistance <em>R</em> is allowed to be positive, zero, or negative.</p>
+    </html>", revisions = "<html>
+    <ul>
+    <li><em> August 07, 2009   </em>
+           by Anton Haumer<br> temperature dependency of resistance added<br>
+           </li>
+    <li><em> March 11, 2009   </em>
+           by Christoph Clauss<br> conditional heat port added<br>
+           </li>
+    <li><em> 1998   </em>
+           by Christoph Clauss<br> initially implemented<br>
+           </li>
+    </ul>
+    </html>"),
+        Icon(coordinateSystem(preserveAspectRatio = true, extent = {{-100, -100}, {100, 100}}), graphics = {Rectangle(extent = {{-70, 30}, {70, -30}}, lineColor = {0, 0, 255}, fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid), Line(points = {{-90, 0}, {-70, 0}}, color = {0, 0, 255}), Line(points = {{70, 0}, {90, 0}}, color = {0, 0, 255}), Text(extent = {{-150, -40}, {150, -80}}, textString = "R=%R"), Line(visible = useHeatPort, points = {{0, -100}, {0, -30}}, color = {127, 0, 0}, pattern = LinePattern.Dot), Text(extent = {{-150, 90}, {150, 50}}, textString = "%name", lineColor = {0, 0, 255})}));
+    end active_load;
   end components;
 
   package plls
@@ -1731,21 +2072,21 @@ package grid
       Placement(visible = true, transformation(origin = {-76, 48}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
     Modelica.Blocks.Sources.Sine sine5(amplitude = 230, freqHz = 50, phase = 4.18879) annotation(
       Placement(visible = true, transformation(origin = {-76, 80}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
-  grid.network network1 annotation(
-      Placement(visible = true, transformation(origin = {38, 2}, extent = {{-46, -46}, {46, 46}}, rotation = 0)));
+  grid.network_active network_active1 annotation(
+      Placement(visible = true, transformation(origin = {45, -7}, extent = {{-47, -47}, {47, 47}}, rotation = 0)));
   equation
-    connect(sine5.y, network1.i1p3) annotation(
-      Line(points = {{-64, 80}, {-34, 80}, {-34, 22}, {-10, 22}, {-10, 22}}, color = {0, 0, 127}));
-  connect(sine4.y, network1.i1p2) annotation(
-      Line(points = {{-64, 48}, {-40, 48}, {-40, 16}, {-10, 16}, {-10, 16}}, color = {0, 0, 127}));
-  connect(sine3.y, network1.i1p1) annotation(
-      Line(points = {{-64, 14}, {-34, 14}, {-34, 10}, {-10, 10}, {-10, 10}}, color = {0, 0, 127}));
-  connect(sine2.y, network1.i2p3) annotation(
-      Line(points = {{-64, -16}, {-64, -16}, {-64, -6}, {-10, -6}, {-10, -6}}, color = {0, 0, 127}));
-  connect(sine1.y, network1.i2p2) annotation(
-      Line(points = {{-64, -48}, {-50, -48}, {-50, -12}, {-10, -12}, {-10, -12}, {-10, -12}}, color = {0, 0, 127}));
-  connect(sine.y, network1.i2p1) annotation(
-      Line(points = {{-64, -82}, {-32, -82}, {-32, -18}, {-10, -18}, {-10, -18}}, color = {0, 0, 127}));
+  connect(sine5.y, network_active1.i1p3) annotation(
+      Line(points = {{-64, 80}, {-36, 80}, {-36, 12}, {-4, 12}, {-4, 12}}, color = {0, 0, 127}));
+  connect(sine4.y, network_active1.i1p2) annotation(
+      Line(points = {{-64, 48}, {-50, 48}, {-50, 8}, {-4, 8}, {-4, 8}}, color = {0, 0, 127}));
+  connect(sine2.y, network_active1.i2p3) annotation(
+      Line(points = {{-64, -16}, {-4, -16}, {-4, -16}, {-4, -16}}, color = {0, 0, 127}));
+  connect(sine1.y, network_active1.i2p2) annotation(
+      Line(points = {{-64, -48}, {-34, -48}, {-34, -20}, {-4, -20}, {-4, -22}}, color = {0, 0, 127}));
+  connect(sine.y, network_active1.i2p1) annotation(
+      Line(points = {{-64, -82}, {-50, -82}, {-50, -60}, {-20, -60}, {-20, -28}, {-4, -28}, {-4, -26}}, color = {0, 0, 127}));
+  connect(sine3.y, network_active1.i1p1) annotation(
+      Line(points = {{-64, 14}, {-54, 14}, {-54, 2}, {-4, 2}, {-4, 2}}, color = {0, 0, 127}));
   end sine_Test;
   
   model network_singleInverter
@@ -1783,6 +2124,78 @@ package grid
     annotation(
       Diagram);
   end network_singleInverter;
+  
+  model network_active
+    grid.inverters.inverter inverter1 annotation(
+      Placement(visible = true, transformation(origin = {-70, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    grid.ideal_filter.lc lc1 annotation(
+      Placement(visible = true, transformation(origin = {-30, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    grid.inverters.inverter inverter2 annotation(
+      Placement(visible = true, transformation(origin = {-70, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    grid.ideal_filter.lc lc2 annotation(
+      Placement(visible = true, transformation(origin = {30, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+    Modelica.Blocks.Interfaces.RealInput i1p1 annotation(
+      Placement(visible = true, transformation(origin = {-104, 18}, extent = {{-8, -8}, {8, 8}}, rotation = 0), iconTransformation(origin = {-104, 18}, extent = {{-8, -8}, {8, 8}}, rotation = 0)));
+    Modelica.Blocks.Interfaces.RealInput i2p1 annotation(
+      Placement(visible = true, transformation(origin = {-104, -42}, extent = {{-8, -8}, {8, 8}}, rotation = 0), iconTransformation(origin = {-104, -42}, extent = {{-8, -8}, {8, 8}}, rotation = 0)));
+    Modelica.Blocks.Interfaces.RealInput i1p2 annotation(
+      Placement(visible = true, transformation(origin = {-104, 30}, extent = {{-8, -8}, {8, 8}}, rotation = 0), iconTransformation(origin = {-104, 30}, extent = {{-8, -8}, {8, 8}}, rotation = 0)));
+    Modelica.Blocks.Interfaces.RealInput i2p2 annotation(
+      Placement(visible = true, transformation(origin = {-104, -30}, extent = {{-8, -8}, {8, 8}}, rotation = 0), iconTransformation(origin = {-104, -30}, extent = {{-8, -8}, {8, 8}}, rotation = 0)));
+    Modelica.Blocks.Interfaces.RealInput i2p3 annotation(
+      Placement(visible = true, transformation(origin = {-104, -18}, extent = {{-8, -8}, {8, 8}}, rotation = 0), iconTransformation(origin = {-104, -18}, extent = {{-8, -8}, {8, 8}}, rotation = 0)));
+    Modelica.Blocks.Interfaces.RealInput i1p3 annotation(
+      Placement(visible = true, transformation(origin = {-104, 42}, extent = {{-8, -8}, {8, 8}}, rotation = 0), iconTransformation(origin = {-104, 42}, extent = {{-8, -8}, {8, 8}}, rotation = 0)));
+    ideal_filter.lcl lcl1 annotation(
+      Placement(visible = true, transformation(origin = {-32, -30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  grid.active_loads.r_active r_active annotation(
+      Placement(visible = true, transformation(origin = {70, 30}, extent = {{-10, -10}, {10, 10}}, rotation = 0)));
+  equation
+    connect(lc1.pin6, lc2.pin3) annotation(
+      Line(points = {{-20, 36}, {20, 36}, {20, 36}, {20, 36}}, color = {0, 0, 255}));
+    connect(lc1.pin5, lc2.pin2) annotation(
+      Line(points = {{-20, 30}, {20, 30}, {20, 30}, {20, 30}}, color = {0, 0, 255}));
+    connect(lc1.pin4, lc2.pin1) annotation(
+      Line(points = {{-20, 24}, {20, 24}, {20, 24}, {20, 24}}, color = {0, 0, 255}));
+    connect(inverter1.pin3, lc1.pin3) annotation(
+      Line(points = {{-60, 36}, {-40, 36}}, color = {0, 0, 255}));
+    connect(inverter1.pin2, lc1.pin2) annotation(
+      Line(points = {{-60, 30}, {-40, 30}}, color = {0, 0, 255}));
+    connect(inverter1.pin1, lc1.pin1) annotation(
+      Line(points = {{-60, 24}, {-40, 24}}, color = {0, 0, 255}));
+    connect(i1p1, inverter1.u1) annotation(
+      Line(points = {{-104, 18}, {-86, 18}, {-86, 24}, {-80, 24}, {-80, 24}}, color = {0, 0, 127}));
+    connect(i1p2, inverter1.u2) annotation(
+      Line(points = {{-104, 30}, {-80, 30}, {-80, 30}, {-80, 30}}, color = {0, 0, 127}));
+    connect(i1p3, inverter1.u3) annotation(
+      Line(points = {{-104, 42}, {-86, 42}, {-86, 36}, {-80, 36}}, color = {0, 0, 127}));
+    connect(i2p3, inverter2.u3) annotation(
+      Line(points = {{-104, -18}, {-88, -18}, {-88, -24}, {-80, -24}, {-80, -24}}, color = {0, 0, 127}));
+    connect(i2p2, inverter2.u2) annotation(
+      Line(points = {{-104, -30}, {-80, -30}, {-80, -30}, {-80, -30}}, color = {0, 0, 127}));
+    connect(i2p1, inverter2.u1) annotation(
+      Line(points = {{-104, -42}, {-90, -42}, {-90, -36}, {-80, -36}, {-80, -36}}, color = {0, 0, 127}));
+    connect(inverter2.pin3, lcl1.pin3) annotation(
+      Line(points = {{-60, -24}, {-42, -24}, {-42, -24}, {-42, -24}}, color = {0, 0, 255}));
+    connect(inverter2.pin2, lcl1.pin2) annotation(
+      Line(points = {{-60, -30}, {-42, -30}, {-42, -30}, {-42, -30}}, color = {0, 0, 255}));
+    connect(inverter2.pin1, lcl1.pin1) annotation(
+      Line(points = {{-60, -36}, {-42, -36}, {-42, -36}, {-42, -36}}, color = {0, 0, 255}));
+    connect(lcl1.pin6, lc2.pin3) annotation(
+      Line(points = {{-22, -24}, {-6, -24}, {-6, 36}, {20, 36}, {20, 36}}, color = {0, 0, 255}));
+    connect(lcl1.pin5, lc2.pin2) annotation(
+      Line(points = {{-22, -30}, {0, -30}, {0, 30}, {20, 30}, {20, 30}}, color = {0, 0, 255}));
+    connect(lcl1.pin4, lc2.pin1) annotation(
+      Line(points = {{-22, -36}, {6, -36}, {6, 24}, {20, 24}, {20, 24}}, color = {0, 0, 255}));
+  connect(lc2.pin6, r_active.pin3) annotation(
+      Line(points = {{40, 36}, {60, 36}, {60, 36}, {60, 36}}, color = {0, 0, 255}));
+  connect(lc2.pin5, r_active.pin2) annotation(
+      Line(points = {{40, 30}, {40, 30}, {40, 30}, {60, 30}}, color = {0, 0, 255}));
+  connect(lc2.pin4, r_active.pin1) annotation(
+      Line(points = {{40, 24}, {60, 24}, {60, 24}, {60, 24}}, color = {0, 0, 255}));
+    annotation(
+      Diagram);
+  end network_active;
   annotation(
     uses(Modelica(version = "3.2.3")));
 end grid;
